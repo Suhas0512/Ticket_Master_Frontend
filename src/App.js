@@ -19,6 +19,7 @@ import TicketEdit from './components/tickets/Edit'
 import Swal from 'sweetalert2';
 import { startLogout } from './actions/userAction';
 import Home from './components/Home';
+import Home1 from './components/Home1';
 
 
 function App(props) {
@@ -88,7 +89,8 @@ function App(props) {
       }
       
       <Switch>
-      <Route path="/" component={Home} exact={true}/>
+      {Object.keys(props.user).length==0?<Route path="/" component={Home1} exact={true}/>:
+      <Route path="/" component={Home} exact={true}/>}
       <Route path="/users/login" component={Login}></Route>
       <Route path="/users/register" component={Register}></Route>
       <Route path="/users/account" component={Account}></Route>

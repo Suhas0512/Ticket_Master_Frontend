@@ -79,7 +79,7 @@ export const startLogin=(formData,redirect)=>{
             })
             .then((response)=>{
                 localStorage.removeItem('authToken')
-                window.location.href="/users/login"
+                window.location.href="/"
             })
         }
     }
