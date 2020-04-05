@@ -5,6 +5,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { MDBDataTable } from 'mdbreact'
 
 function TicketsList(props){
+    console.log(props)
     const handleRemove=(id)=>{
         const confirmRemove=window.confirm("Are you sure")
         if(confirmRemove){
@@ -21,6 +22,18 @@ function TicketsList(props){
                 field: 'code'
             },
             {
+                label: 'Customer',
+                field: 'customer'
+            },
+            {
+                label: 'Department',
+                field: 'department'
+            },
+            {
+                label: 'Employees',
+                field: 'employees'
+            },
+            {
                 label: 'Priority',
                 field: 'priority'
             },
@@ -35,9 +48,14 @@ function TicketsList(props){
         ],
         rows: props.tickets.map(ticket => ({
             code:ticket.code,
-            priority:ticket.priority,
+            customer:ticket ? props.customer.find(cust=>cust._id == ticket.customer).name:'loading',
+            department:ticket ? props.department.find(depart=>depart._id == ticket.department).name:"loading",
+            employees:props.employee.length !==0 ? ticket.employees.map(tick=>{
+                return props.employee.find(emp=>emp._id == tick._id).name
+            }) : 'loading',
             messages:ticket.message,
-            actions: <div>
+            priority:ticket.priority,
+            actions: <div><Link to={`/tickets/edit/${ticket._id}`} className="btn btn-link">Edit</Link>
                 <button className="btn btn-danger btn-sm" onClick={() => {
                     handleRemove(ticket._id)
                 }}> remove </button>
@@ -58,8 +76,7 @@ function TicketsList(props){
         </div>
     )
 }
-const mapStateToProps=(state,props)=>{
-    const id=props.match.params.id
+const mapStateToProps=(state)=>{
     return{
         tickets : state.tickets,
         customer:state.customers,

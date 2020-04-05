@@ -60,3 +60,24 @@ export const startRemoveTickets=(id)=>{
         })
     }
 }
+
+export const updateTicket=(ticket)=>{
+    return{
+        type:'UPDATE_TICKET',
+        payload:ticket
+    }
+}
+export const startUpdateTicket=(formData,id,redirect)=>{
+    return(dispatch)=>{
+        axios.put(`/tickets/${id}`,formData,{
+            headers:{
+                'x-auth':localStorage.getItem('authToken')
+            }
+        })
+        .then(response=>{
+            const ticket=response.data
+            dispatch(updateTicket(ticket))
+            redirect()
+        })
+    }
+}

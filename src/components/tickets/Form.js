@@ -1,17 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { ticketFind } from '../../selectors/ticketSelector'
 
 class TicketsForm extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            code:'',
-            customer:'',
-            department:'',
+            code:this.props.ticket?this.props.ticket.code:'',
+            customer:this.props.ticket?this.props.ticket.customer:'',
+            department:this.props.ticket?this.props.ticket.department:'',
             employees:'',
-            message:'',
-            priority:''
+            message:this.props.ticket?this.props.ticket.message:'',
+            priority:this.props.ticket?this.props.ticket.priority:''
         }
     }
     handleChange=(e)=>{
@@ -91,11 +92,13 @@ class TicketsForm extends React.Component{
         )
     }
 }
-const mapStateToProps=(state)=>{
+const mapStateToProps=(state,props)=>{
+    const id=props.match.params.id
     return{
         customer:state.customers,
         department:state.departments,
-        employees:state.employees
+        employees:state.employees,
+        ticket : ticketFind(state.tickets,id)
     }
 }
 export default withRouter(connect(mapStateToProps)(TicketsForm))

@@ -2,6 +2,15 @@ const ticketsInitial=[]
 
 const ticketsReducer=(state=ticketsInitial,action)=>{
     switch(action.type){
+        case 'UPDATE_TICKET':{
+            return state.map(ticket=>{
+                if(ticket._id==action.payload._id){
+                    return {...ticket,...action.payload}
+                }else{
+                    return {...ticket}
+                }
+            })
+        }
         case 'ADD_TICKETS':{
             return [...state,action.payload]
         }
