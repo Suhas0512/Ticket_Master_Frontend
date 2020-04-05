@@ -49,8 +49,8 @@ function App(props) {
           <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <a className="navbar-brand ml-auto">Ticket Master</a>
-            <ul className="navbar-nav">
+            <a className="navbar-brand ">Ticket Master</a>
+            <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
             <Link className="nav-link" to="/">Home</Link></li>
             <li className="nav-item active">
