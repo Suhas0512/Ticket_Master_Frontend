@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { startSetTickets, startRemoveTickets } from '../../actions/ticketsAction'
+import { startSetTickets, startRemoveTickets, startUpdateStatus } from '../../actions/ticketsAction'
 import { Link, withRouter } from 'react-router-dom'
 import { MDBDataTable } from 'mdbreact'
 
@@ -11,6 +11,14 @@ function TicketsList(props){
         if(confirmRemove){
             props.dispatch(startRemoveTickets(id))
         }
+    }
+    const handleChange = (id) => {
+        console.log(id)
+        const status = {
+            isResolved: true
+        }
+        const redirect=()=>props.history.push('/tickets')
+        props.dispatch(startUpdateStatus({id,status,redirect}))
     }
     if(props.tickets.length==0){
         props.dispatch(startSetTickets())
@@ -44,6 +52,10 @@ function TicketsList(props){
             {
                 label: 'Actions',
                 field: 'actions'
+            },
+            {
+                label:'Status',
+                field:'status'
             }
         ],
         rows: props.tickets.map(ticket => ({
@@ -59,7 +71,8 @@ function TicketsList(props){
                 <button className="btn btn-danger btn-sm" onClick={() => {
                     handleRemove(ticket._id)
                 }}> remove </button>
-            </div>
+            </div>,
+            status:<input type="checkbox" checked={ticket.isResolved} onClick={()=>{handleChange(ticket._id)}} />
         }))
     }
     return(

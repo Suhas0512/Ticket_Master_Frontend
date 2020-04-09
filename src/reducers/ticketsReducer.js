@@ -11,6 +11,16 @@ const ticketsReducer=(state=ticketsInitial,action)=>{
                 }
             })
         }
+        case 'UPDATE_STATUS' : {
+            return state.map(ticket=>{
+                if(ticket._id == action.payload._id){
+                    return action.payload
+                }
+                else {
+                    return ticket
+                }
+            })
+        }
         case 'ADD_TICKETS':{
             return [...state,action.payload]
         }

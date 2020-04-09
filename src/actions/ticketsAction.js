@@ -81,3 +81,19 @@ export const startUpdateTicket=(formData,id,redirect)=>{
         })
     }
 }
+export const updateStatus = (ticket) => {
+    return {type:'UPDATE_STATUS',payload:ticket}
+}
+
+export const startUpdateStatus = (obj,redirect) => {
+    return(dispatch)=>{
+        axios.put(`/tickets/${obj.id}`,obj.status,{
+            headers : {
+                'x-auth' : localStorage.getItem('token')
+            }
+        })
+        .then((response)=>{
+            dispatch(updateStatus(response.data))
+        })
+    }
+}
