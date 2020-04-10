@@ -89,11 +89,10 @@ export const startUpdateStatus = (obj) => {
     return(dispatch)=>{
         axios.put(`/tickets/${obj.id}`,obj.formData,{
             headers : {
-                'x-auth' : localStorage.getItem('token')
+                'x-auth' : localStorage.getItem('authToken')
             }
         })
         .then((response)=>{
-            console.log(response.data)
             dispatch(updateStatus(response.data))
         }).catch(err=>console.log(err))
     }

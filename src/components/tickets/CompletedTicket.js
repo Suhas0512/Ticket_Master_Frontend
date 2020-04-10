@@ -86,7 +86,7 @@ function CompletedTicket(props){
                    bordered
                    data={data}
                 />}
-            <Link to="/tickets/new" className="btn btn-primary">Add Tickets</Link>
+            
         </div>
     )
 }

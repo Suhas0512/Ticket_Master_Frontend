@@ -4,6 +4,9 @@ import {startSetTickets} from '../../actions/ticketsAction'
 import PendingTicket from './PendingTicket'
 import CompletedTicket from './CompletedTicket'
 import {withRouter,Link} from 'react-router-dom'
+import PieChart from './PieChart'
+import LinearProgress from "@material-ui/core/LinearProgress";
+import BarChart from './BarChart'
 
 class Tickets extends React.Component{
     constructor(props){
@@ -41,7 +44,6 @@ class Tickets extends React.Component{
         <div className="container">
             <h2>Listing Tickets - {this.props.tickets ? this.props.tickets.length : 'loading'}</h2>
             <form onSubmit={this.handleSubmit} align="right">
-                <input type="text" value={this.state.search} onChange={this.handleChange} /><input type="submit" value="search" style={{background:"green",color:"white"}} />
                 </form>
             
             <nav className="navbar navbar-expand-lg navbar-light bg-light" >
@@ -56,7 +58,6 @@ class Tickets extends React.Component{
               </ul>
               </div>
               </nav>
-              
               {
                   this.state.pending && <PendingTicket /> 
               }
@@ -64,9 +65,23 @@ class Tickets extends React.Component{
                   this.state.complete && <CompletedTicket />
               }
 
-              <Link to="/ticket/new">add ticket</Link>
+                <Link to="/tickets/new" className="btn btn-primary">Add Tickets</Link>
               <br />
               <br />
+              <h3>Progress bar indicating completed tickets</h3>
+              <LinearProgress variant="determinate" value={this.props.tickets.filter(tick=>tick.isResolved).length/this.props.tickets.length*100} color="secondary"/><br/>
+              <h3 align="center">Data on Pending Tickets</h3>
+              <div className="container">
+                  <div className="row">
+                      <div className="col-md-6">
+                         <PieChart />
+                      </div>
+                      <div className="col-md-6">
+                         <BarChart />
+                      </div>
+                  </div>
+
+              </div>
         </div>
     )
     }
