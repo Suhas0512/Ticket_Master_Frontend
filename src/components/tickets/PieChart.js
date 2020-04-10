@@ -21,7 +21,9 @@ function PieChart(props){
                 ]}
                 options={{
                     title: 'Ticket Priority',
-                    is3D: true
+                    is3D: true,
+                    colors:['red','blue','green'],
+                    pieHole:1
                 }}
                 rootProps={{ 'data-testid': '1' }}
                 />
