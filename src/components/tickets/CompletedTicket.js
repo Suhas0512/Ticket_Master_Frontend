@@ -14,7 +14,7 @@ function CompletedTicket(props){
     }
     const handleChange = (id) => {
         const formData = {
-            isResolved: true
+            isResolved: false
         }
         props.dispatch(startUpdateStatus({id,formData}))
     }
@@ -56,7 +56,9 @@ function CompletedTicket(props){
                 field:'status'
             }
         ],
-        rows: props.tickets.map(ticket => ({
+        rows: props.tickets.map(ticket =>
+            ticket.isResolved && 
+            ({
             code:ticket.code,
             customer:ticket ? props.customer.find(cust=>cust._id == ticket.customer).name:'loading',
             department:ticket ? props.department.find(depart=>depart._id == ticket.department).name:"loading",

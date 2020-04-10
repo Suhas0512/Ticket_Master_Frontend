@@ -87,13 +87,14 @@ export const updateStatus = (ticket) => {
 
 export const startUpdateStatus = (obj) => {
     return(dispatch)=>{
-        axios.put(`/tickets/${obj.id}`,obj.status,{
+        axios.put(`/tickets/${obj.id}`,obj.formData,{
             headers : {
                 'x-auth' : localStorage.getItem('token')
             }
         })
         .then((response)=>{
+            console.log(response.data)
             dispatch(updateStatus(response.data))
-        })
+        }).catch(err=>console.log(err))
     }
 }
