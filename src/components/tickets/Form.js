@@ -29,8 +29,7 @@ class TicketsForm extends React.Component{
             department:this.state.department,
             employees:[].concat({_id:this.state.employees}),
             message:this.state.message,
-            priority:this.state.priority,
-            isResolved:false
+            priority:this.state.priority
         }
         this.props.handleSubmit(formData)
     }

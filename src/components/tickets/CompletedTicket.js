@@ -4,7 +4,7 @@ import { startSetTickets, startRemoveTickets, startUpdateStatus } from '../../ac
 import { Link, withRouter } from 'react-router-dom'
 import { MDBDataTable } from 'mdbreact'
 
-function TicketsList(props){
+function CompletedTicket(props){
     console.log(props)
     const handleRemove=(id)=>{
         const confirmRemove=window.confirm("Are you sure")
@@ -13,12 +13,10 @@ function TicketsList(props){
         }
     }
     const handleChange = (id) => {
-        console.log(id)
-        const status = {
+        const formData = {
             isResolved: true
         }
-        const redirect=()=>props.history.push('/tickets')
-        props.dispatch(startUpdateStatus({id,status,redirect}))
+        props.dispatch(startUpdateStatus({id,formData}))
     }
     if(props.tickets.length==0){
         props.dispatch(startSetTickets())
@@ -72,7 +70,7 @@ function TicketsList(props){
                     handleRemove(ticket._id)
                 }}> remove </button>
             </div>,
-            status:<input type="checkbox" checked={ticket.isResolved} onClick={()=>{handleChange(ticket._id)}} />
+            status:<input type="checkbox" checked={ticket.isResolved} onChange={()=>{handleChange(ticket._id)}} />
         }))
     }
     return(
@@ -80,11 +78,12 @@ function TicketsList(props){
             <br/>
             <br/>
             <h2 className="text-center">Listing Tickets {props.tickets.length}</h2>
+            {props.tickets.length!=0&&props.customer.length!=0&&props.department.length!=0&&props.employee.length!=0&&
             <MDBDataTable 
                    striped 
                    bordered
                    data={data}
-                />
+                />}
             <Link to="/tickets/new" className="btn btn-primary">Add Tickets</Link>
         </div>
     )
@@ -97,4 +96,4 @@ const mapStateToProps=(state)=>{
         employee:state.employees
     }
 }
-export default withRouter(connect(mapStateToProps)(TicketsList))
+export default withRouter(connect(mapStateToProps)(CompletedTicket))

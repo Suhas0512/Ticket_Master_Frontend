@@ -85,7 +85,7 @@ export const updateStatus = (ticket) => {
     return {type:'UPDATE_STATUS',payload:ticket}
 }
 
-export const startUpdateStatus = (obj,redirect) => {
+export const startUpdateStatus = (obj) => {
     return(dispatch)=>{
         axios.put(`/tickets/${obj.id}`,obj.status,{
             headers : {

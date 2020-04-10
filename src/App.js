@@ -13,13 +13,13 @@ import EmployeesList from './components/employees/List';
 import EmployeesNew from './components/employees/New';
 import EmployeesShow from './components/employees/Show';
 import EmployeesEdit from './components/employees/Edit';
-import TicketsList from './components/tickets/List';
 import TicketsNew from './components/tickets/New';
 import TicketEdit from './components/tickets/Edit'
 import Swal from 'sweetalert2';
 import { startLogout } from './actions/userAction';
 import Home from './components/Home';
 import Home1 from './components/Home1';
+import Tickets from './components/tickets/Tickets';
 
 
 function App(props) {
@@ -107,7 +107,7 @@ function App(props) {
       <Route path="/employees/edit/:id" component={EmployeesEdit}></Route>
       <Route path="/employees/:id" component={EmployeesShow}></Route>
 
-      <Route path="/tickets" component={TicketsList} exact={true}></Route>
+      <Route path="/tickets" component={Tickets} exact={true}></Route>
       <Route path="/tickets/new" component={TicketsNew}></Route>
       <Route path="/tickets/edit/:id" component={TicketEdit}></Route>
       </Switch>
