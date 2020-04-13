@@ -17,17 +17,24 @@ function DepartmentList(props){
         <div>
             <br/>
             <br/>
-            <h2 className="text-center">Listing Departments - {props.departments.length}</h2>
-            <ul className="list-group">
-                {props.departments.map(department=>{
-                    return <li key={department._id} className="list-group-item">
-                        {department.name}
-                        <button className="float-right btn btn-danger" onClick={()=>{handleRemove(department._id)}}>remove</button>
-                    </li>
-                })}
-            </ul>
-            <h2 className="text-center">Add Departments</h2>
-            <DepartmentForm/>
+            <div className="row">
+                <div className="col-md-7">
+                    <h2 className="text-center">Listing Departments - {props.departments.length}</h2>
+                    <ul className="list-group">
+                    {props.departments.map(department=>{
+                        return <li key={department._id} className="list-group-item">
+                            {department.name}
+                            <button className="float-right btn btn-danger" onClick={()=>{handleRemove(department._id)}}>remove</button>
+                        </li>
+                    })}
+                </ul>
+                </div>
+
+                <div className="col-md-5">
+                <h2 className="text-center">Add Departments</h2>
+                <DepartmentForm/> 
+                </div>
+            </div> 
         </div>
     )
 }

@@ -25,7 +25,7 @@ class DepartmentForm extends React.Component{
             <div>
                 <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="name">name</label>
+                    <label htmlFor="name">Name</label>
                     <input id="name" value={this.state.name} onChange={this.handleChange} name="name" className="form-control"></input><br/>
                     <input type="submit" value="submit" class="btn btn-primary"></input>
                     </div>
